@@ -1,6 +1,6 @@
 const synth = speechSynthesis,
-speechBtn = document.querySelector(".speech"),
-quoteContent = document.querySelector(".content");
+    speechBtn = document.querySelector(".speech"),
+    quoteContent = document.querySelector(".content");
 
 
 function Footer() {
@@ -48,53 +48,56 @@ function App() {
         setColor(colors[randColorIndex]);
     }
 
-    const getSound =()=> {
+    const getSound = () => {
         let quote = document.getElementsByClassName("content").innerHTML;
         let author = document.getElementsByClassName("card-title").innerHTML;
         if (quote != 'No text') {
             let utterance
-            if (author!= 'No author') {
+            if (author != 'No author') {
                 utterance = new SpeechSynthesisUtterance(`${randomQuotes.text} by ${randomQuotes.author}`);
             }
-            else  {
+            else {
                 utterance = new SpeechSynthesisUtterance(`${randomQuotes.text}`);
             }
             synth.speak(utterance);
-        setInterval(()=>{
-            !synth.speaking ? speechBtn.classList.remove("active") : speechBtn.classList.add("active");
-        }, 10);
+            setInterval(() => {
+                !synth.speaking ? speechBtn.classList.remove("active") : speechBtn.classList.add("active");
+            }, 10);
         }
     }
 
-    const copyFeature =() => {
+    const copyFeature = () => {
         navigator.clipboard.writeText(randomQuotes.text);
     }
 
     return (
         <div className="d-flex align-items-center flex-column pt-5" style={{ backgroundColor: color, minHeight: "100vh" }} >
-            <div className="container text-center">
-                    <div className="card shadow">
-                        <div className="card-header border-bottom-0"><h5>Quote of the day</h5></div>
-                        <div className="card-body">
-                            {randomQuotes ? <>
-                                <h5 className="card-title">-
-                                    {(randomQuotes.author != null)?randomQuotes.author : 'No author'}-
-                                </h5>
-                                <p className="card-text content">&quot;{
-                                    randomQuotes.text || 'No text'
-                                }&quot;</p>
-                            </> : <h2>Loading</h2>}
+            <div className="container text-center" id="quote-box">
+                <div className="card shadow">
+                    <div className="card-header border-bottom-0"><h5>Quote of the day</h5></div>
+                    <div className="card-body">
+                        {randomQuotes ? <>
+                            <h5 className="card-title" id="author">-
+                                {(randomQuotes.author != null) ? randomQuotes.author : 'No author'}-
+                            </h5>
+                            <p className="card-text content" id="text">&quot;{
+                                randomQuotes.text || 'No text'
+                            }&quot;</p>
+                        </> : <h2>Loading</h2>}
 
-                            <div className="row justify-content-between">
-                                <button className="btn btn-primary" onClick={getNewQuote}>New quote
-                                </button>
-                                <div className="button-features">
-                                    <div className="button-wrap"><li className="speech button-component rounded-circle" onClick={getSound}><i className="fa-solid fa-volume-high"></i></li></div>
-                                    <div className="button-wrap"><li className="copy button-component rounded-circle" onClick={copyFeature}><i className="fa-solid fa-copy"></i></li></div>
-                                </div>
+                        <div className="row justify-content-between">
+                            <button className="btn btn-primary" onClick={getNewQuote} id="new-quote">New quote
+                            </button>
+                            <div className="button-features">
+                                <div className="button-wrap"><a id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${randomQuotes.text}`}
+                                    target="_top"
+                                    rel="noreferrer"><i class="fa-brands fa-twitter"></i></a></div>
+                                <div className="button-wrap" id="button"><li className="speech button-component rounded-circle" onClick={getSound}><i className="fa-solid fa-volume-high"></i></li></div>
+                                <div className="button-wrap"><li className="copy button-component rounded-circle" onClick={copyFeature}><i className="fa-solid fa-copy"></i></li></div>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
             <Footer />
         </div>

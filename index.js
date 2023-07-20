@@ -89,8 +89,8 @@ function App() {
                             <button className="btn btn-primary" onClick={getNewQuote} id="new-quote">New quote
                             </button>
                             <div className="button-features">
-                                <div className="button-wrap"><a id="tweet-quote" href={`https://twitter.com/intent/tweet?text=${randomQuotes.text}`}
-                                    target="_top"
+                                <div className="button-wrap"><a id="tweet-quote" target="_blank" href={`https://twitter.com/intent/tweet?text=${randomQuotes.text}` }
+                                    
                                     rel="noreferrer"><i class="fa-brands fa-twitter"></i></a></div>
                                 <div className="button-wrap" id="button"><li className="speech button-component rounded-circle" onClick={getSound}><i className="fa-solid fa-volume-high"></i></li></div>
                                 <div className="button-wrap"><li className="copy button-component rounded-circle" onClick={copyFeature}><i className="fa-solid fa-copy"></i></li></div>
